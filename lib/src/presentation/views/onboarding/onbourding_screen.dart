@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:travel/src/config/router/app_routes.dart';
 import 'package:travel/src/presentation/views/onboarding/pages/page_one.dart';
 import 'package:travel/src/presentation/views/onboarding/pages/page_there.dart';
 import 'package:travel/src/presentation/views/onboarding/pages/page_two.dart';
@@ -28,7 +30,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       ),
       body: Stack(
         children: [
-
           Positioned(
             bottom: 150,
             right: 0,
@@ -80,6 +81,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           duration: const Duration(milliseconds: 400),
                           curve: Curves.easeInOut);
                     });
+                  } else {
+                    context.go(AppRoutes.signInScreen);
                   }
                 },
                 child: SvgPicture.asset(AppIcons.nextButton)),
