@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:travel/src/config/router/app_routes.dart';
 import 'package:travel/src/utils/extensions/size_extension.dart';
 import 'package:travel/src/utils/resources/app_colors.dart';
 import 'package:travel/src/utils/resources/app_icons.dart';
@@ -56,7 +58,9 @@ class SignInScreen extends StatelessWidget {
               ),
               47.h,
               ZoomTapAnimation(
-                onTap: () {},
+                onTap: () {
+                  context.go(AppRoutes.homeScreen);
+                },
                 child: Container(
                   margin: const EdgeInsets.symmetric(horizontal: 16),
                   padding: const EdgeInsets.symmetric(horizontal: 30),
