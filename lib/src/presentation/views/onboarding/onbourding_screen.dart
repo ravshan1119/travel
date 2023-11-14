@@ -3,7 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel/src/presentation/views/onboarding/pages/page_one.dart';
 import 'package:travel/src/presentation/views/onboarding/pages/page_there.dart';
 import 'package:travel/src/presentation/views/onboarding/pages/page_two.dart';
-import 'package:travel/src/presentation/views/onboarding/widgets/dots.dart';
+import 'package:travel/src/utils/constants/app_constants.dart';
+import 'package:travel/src/utils/resources/app_colors.dart';
 import 'package:travel/src/utils/resources/app_icons.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -15,6 +16,7 @@ class OnBoardingScreen extends StatefulWidget {
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   int index = 0;
+  int current = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -31,16 +33,30 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             child: SvgPicture.asset(AppIcons.nextButton),
           ),
           Positioned(
-              bottom: 150,
-              left: 0,
-              right: 0,
-              child: Dots(
-                index: index,
-              )),
+            bottom: 150,
+            right: 0,
+            left: 0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: dots.map((b) {
+                int index = dots.indexOf(b);
+                return Container(
+                  width: 8,
+                  height: 8,
+                  margin: const EdgeInsets.only(top: 16, left: 6, right: 6),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: current == index ? AppColors.green : AppColors.black.withOpacity(0.2),
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
           PageView(
             onPageChanged: (index) {
               setState(() {
                 this.index = index;
+                current = index;
               });
             },
             children: const [
