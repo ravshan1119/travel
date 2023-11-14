@@ -6,6 +6,7 @@ import 'package:travel/src/presentation/views/onboarding/pages/page_two.dart';
 import 'package:travel/src/utils/constants/app_constants.dart';
 import 'package:travel/src/utils/resources/app_colors.dart';
 import 'package:travel/src/utils/resources/app_icons.dart';
+import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -17,6 +18,7 @@ class OnBoardingScreen extends StatefulWidget {
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   int index = 0;
   int current = 0;
+  PageController pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +28,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       ),
       body: Stack(
         children: [
-          Positioned(
-            bottom: 0,
-            right: 0,
-            left: 0,
-            child: SvgPicture.asset(AppIcons.nextButton),
-          ),
+
           Positioned(
             bottom: 150,
             right: 0,
@@ -46,13 +43,16 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   margin: const EdgeInsets.only(top: 16, left: 6, right: 6),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: current == index ? AppColors.green : AppColors.black.withOpacity(0.2),
+                    color: current == index
+                        ? AppColors.green
+                        : AppColors.black.withOpacity(0.2),
                   ),
                 );
               }).toList(),
             ),
           ),
           PageView(
+            controller: pageController,
             onPageChanged: (index) {
               setState(() {
                 this.index = index;
@@ -64,7 +64,26 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               PageTwo(),
               PageThere(),
             ],
-          )
+          ),
+          Positioned(
+            bottom: 0,
+            right: 0,
+            left: 0,
+            child: ZoomTapAnimation(
+                onTap: () {
+                  if (index < 2) {
+                    setState(() {
+                      print("object");
+                      index++;
+                      current = index;
+                      pageController.nextPage(
+                          duration: const Duration(milliseconds: 400),
+                          curve: Curves.easeInOut);
+                    });
+                  }
+                },
+                child: SvgPicture.asset(AppIcons.nextButton)),
+          ),
         ],
       ),
     );
