@@ -71,7 +71,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   ...List.generate(
                     10,
-                        (index) => const Padding(
+                    (index) => const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: RatingTopItem(),
                     ),
