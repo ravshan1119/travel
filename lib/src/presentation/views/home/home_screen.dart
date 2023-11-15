@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel/src/data/datasources/local/fike_data.dart';
 import 'package:travel/src/presentation/views/home/widgets/rating_top_item.dart';
 import 'package:travel/src/presentation/views/home/widgets/travel_item.dart';
 import 'package:travel/src/utils/extensions/size_extension.dart';
@@ -39,10 +40,14 @@ class HomeScreen extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 children: [
                   ...List.generate(
-                    10,
-                    (index) => const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: TravelItem(),
+                    fikeData.length,
+                    (index) => Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TravelItem(
+                          title: fikeData[index].location,
+
+                          description: fikeData[index].description,
+                          image: fikeData[index].img),
                     ),
                   )
                 ],
@@ -70,7 +75,7 @@ class HomeScreen extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 children: [
                   ...List.generate(
-                    10,
+                    fikeData.length,
                     (index) => const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: RatingTopItem(),

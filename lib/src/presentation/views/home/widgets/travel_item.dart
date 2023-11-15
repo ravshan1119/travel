@@ -1,11 +1,19 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:travel/src/utils/extensions/size_extension.dart';
 import 'package:travel/src/utils/resources/app_colors.dart';
-import 'package:travel/src/utils/resources/app_images.dart';
 
 class TravelItem extends StatefulWidget {
-  const TravelItem({super.key});
+  const TravelItem(
+      {super.key,
+      required this.title,
+      required this.description,
+      required this.image});
+
+  final String title;
+  final String description;
+  final String image;
 
   @override
   State<TravelItem> createState() => _TravelItemState();
@@ -34,14 +42,23 @@ class _TravelItemState extends State<TravelItem> {
                 height: 120,
                 width: 200,
                 child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                    child: Image.asset(AppImages.img, fit: BoxFit.cover)),
+                  borderRadius: BorderRadius.circular(16),
+                  child: CachedNetworkImage(
+                    fit: BoxFit.cover,
+                    imageUrl: widget.image,
+                    placeholder: (context, url) =>
+                        const Center(child: CircularProgressIndicator()),
+                    errorWidget: (context, url, error) => const Center(
+                      child: Icon(Icons.error),
+                    ),
+                  ),
+                ),
               ),
             ),
             10.h,
-            const Text(
-              "Samarqand",
-              style: TextStyle(
+            Text(
+              widget.title,
+              style: const TextStyle(
                 fontFamily: "Montserrat",
                 fontSize: 9,
                 fontWeight: FontWeight.w400,
@@ -50,9 +67,9 @@ class _TravelItemState extends State<TravelItem> {
               textAlign: TextAlign.left,
             ),
             8.h,
-            const Text(
-              "Madaniyatlar chorrahasi",
-              style: TextStyle(
+            Text(
+              widget.description,
+              style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
                 color: AppColors.c_16056b,

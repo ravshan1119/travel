@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel/src/config/router/app_routes.dart';
 import 'package:travel/src/utils/resources/app_colors.dart';
 import 'package:travel/src/utils/resources/app_icons.dart';
@@ -55,7 +56,13 @@ class _SplashScreenState extends State<SplashScreen> {
 
 goOnBoanding(BuildContext context) async {
   await Future.delayed(const Duration(seconds: 2));
-  if (context.mounted) {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool? login = prefs.getBool("login");
+  if (login != null) {
+    if (login) {
+      context.go(AppRoutes.homeScreen);
+    }
+  } else {
     context.go(AppRoutes.onBoarding);
   }
 }

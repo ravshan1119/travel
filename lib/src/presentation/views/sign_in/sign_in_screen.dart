@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel/src/config/router/app_routes.dart';
 import 'package:travel/src/presentation/cubits/auth/auth_cubit.dart';
 import 'package:travel/src/presentation/widgets/global_button.dart';
@@ -119,6 +120,10 @@ class _SignInScreenState extends State<SignInScreen> {
                   ZoomTapAnimation(
                     onTap: () async {
                       await context.read<AuthCubit>().signInWithGoogle();
+                      final SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      prefs.setBool("login", true);
+
                       if (context.mounted) {
                         context.goNamed(AppRoutes.homeScreen);
                       }
