@@ -6,6 +6,7 @@ class AppImages {
   static const String onboarding03 = "assets/images/onboarding03.png";
   static const String login = "assets/images/login.png";
   static const String img = "assets/images/img.png";
+  static const String imgTop = "assets/images/img_top.png";
   static const String createNewPasswordDialog =
       "assets/images/create_new_password_dialog.png";
 }
