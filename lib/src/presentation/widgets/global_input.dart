@@ -115,13 +115,13 @@ class _GlobalTextFieldState extends State<GlobalTextField> {
         fillColor: getTheme(context)
             ? (widget.focusNode?.hasFocus ?? internalFocusNode.hasFocus)
                 ? AppColors.yellowTransparent
-                : AppColors.dark2
+                : AppColors.yellowTransparent
             : (widget.focusNode?.hasFocus ?? internalFocusNode.hasFocus)
-                ? const Color(0xFFFFFAED)
-                : const Color(0xFFFAFAFA),
+                ? AppColors.dark3
+                : AppColors.dark3,
         filled: true,
       ),
-      // style: TextStyle(color: AppColors.dark3, fontSize: 16.sp),
+      style: const TextStyle(color: AppColors.dark1, fontSize: 16),
       keyboardType: widget.keyboardType,
       textInputAction: widget.textInputAction,
     );
