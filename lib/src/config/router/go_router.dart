@@ -3,7 +3,7 @@ import 'package:travel/src/config/router/app_routes.dart';
 import 'package:travel/src/presentation/views/home/home_screen.dart';
 import 'package:travel/src/presentation/views/onboarding/onbourding_screen.dart';
 import 'package:travel/src/presentation/views/sign_in/sign_in_screen.dart';
-import 'package:travel/src/presentation/views/splash/splash.dart';
+import 'package:travel/src/presentation/views/splash/splash_screen.dart';
 
 // GoRouter configuration
 final router = GoRouter(
@@ -11,7 +11,7 @@ final router = GoRouter(
     GoRoute(
       path: AppRoutes.splash,
       name: AppRoutes.splash,
-      builder: (context, state) => const SplashScreen(),
+      builder: (context, state) => const SplashPage(),
     ),
     GoRoute(
       path: AppRoutes.onBoarding,
